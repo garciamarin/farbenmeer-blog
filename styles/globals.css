@@ -1,3 +1,55 @@
-html,
-body {
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    html {
+        @apply text-slate-900 ;
+    }
+    h1,h2,h3,h4 {
+        @apply font-alt text-slate-900;
+    }
+    /* h2,h3,h4 {
+        @apply m-8
+    } */
+    h1{
+        @apply font-bold text-3xl p-[1em]
+    }
+    h2{
+        @apply text-2xl font-medium 
+    }
+    h3{
+        @apply text-xl font-medium p-[.25rem]
+    }
+    /* section{
+        @apply container;
+    } */
+  }
+  @layer utilities {
+    .scrollbar::-webkit-scrollbar {
+      width: 20px;
+      height: 20px;
+    }
+  
+    .scrollbar::-webkit-scrollbar-track {
+      border-radius: 100vh;
+      background: #f7f4ed00;
+    }
+  
+    .scrollbar::-webkit-scrollbar-thumb {
+      background: #e0cbcb00;
+      border-radius: 100vh;
+      border: 3px solid #f6f7ed00;
+    }
+  
+    .scrollbar::-webkit-scrollbar-thumb:hover {
+      background: rgba(34, 197, 94, 0)
+
+    }
+  }
+.bg-cat{
+    background-image: url(../public/img/cat.svg);
+    background-repeat: repeat;
+    background-size: 75px;
+    background-attachment: fixed;
 }

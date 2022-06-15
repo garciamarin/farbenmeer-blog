@@ -1,20 +1,19 @@
 import RenderBlogs from "../../components/RenderBlogs"
 import { useRouter } from 'next/router'
-import { useState } from "react";
-import Link from "next/link";
+
 import BlogDetails from "../../components/BlogDetails";
 
 import {blogposts} from "../../public/DataMock/data"
 import { blogs, client } from "../../fetch/ClientGQL";
-import Layout from "../../components/Layout";
 import LayoutGQL from "../../components/LayoutGQL";
 
  
 export default function index({loading, error, blogs}) {
+    
     const router = useRouter()
+
     const blogId = router.query.blog
     const isBlog = blogs.find( blog => blog.id === blogId )
-    console.log(isBlog)
 
     if(error) return <div>Error fetching API, my friend.</div>
     if( blogId && !isBlog ) return <div>Blog not found</div>
