@@ -6,19 +6,7 @@ export default function BlogPreview({blog}) {
   const router = useRouter()
 
   return (
-    <li className='mb-3 shadow-lg  bg-green-500 rounded-lg group'> 
-        {/* <Link href={`/gql/?blog=${blog.id}`}  >
-            <div>
-                <img src={blog.image} alt="blog" width={100} />
-                <div >
-                    <p> {blog.title} </p>
-                    <p> {blog.author} </p>
-                    <p> {dateToHuman(blog.created)}</p>
-                    <br />
-                    <p> {blog.subtitle}</p> 
-                </div>      
-            </div>
-        </Link> */}
+    <li data-testid={`blog-${blog.id}`} className='mb-3 shadow-lg  bg-green-500 rounded-lg group'> 
         <div onClick={()=> {
               router.push(`/gql/?blog=${blog.id}`, 
               undefined, { shallow: true })}}
@@ -33,12 +21,23 @@ export default function BlogPreview({blog}) {
                   <p className="mt-[.6rem]"> {blog.subtitle}</p>
                   <p> {blog.author} </p>
 
-              </div>
-                  {/* <br /> */}
-                  
+              </div>                  
               </div>      
           </div>
         </div>
     </li>
   )
 }
+
+  {/* <Link href={`/gql/?blog=${blog.id}`}  >
+            <div>
+                <img src={blog.image} alt="blog" width={100} />
+                <div >
+                    <p> {blog.title} </p>
+                    <p> {blog.author} </p>
+                    <p> {dateToHuman(blog.created)}</p>
+                    <br />
+                    <p> {blog.subtitle}</p> 
+                </div>      
+            </div>
+        </Link> */}

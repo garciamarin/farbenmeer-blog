@@ -13,11 +13,13 @@ export default function BlogDetails ({loading, blog}) {
             rounded-lg
             shadow-lg
             opacity-[.95]
-          ">
+            "
+            data-testid='blog-details'
+          >
             <Link href="/gql"><p className="p-4 text-right font-medium"> Close </p></Link> 
             <div >      
               <img  className='
-                  mr-2  ml-0
+                  mr-4  ml-0
                   float-left  
                   rounded-lg
                   [clip-path:circle(90%_at_20%_0%)]

@@ -12,9 +12,8 @@ export default function index({loading, error, blogs}) {
     
     const router = useRouter()
 
-    const blogId = router.query.blog
-    const isBlog = blogs.find( blog => blog.id === blogId )
-
+    const blogId = router?.query.blog
+    const isBlog = blogs?.find( blog => blog.id === blogId )
     if(error) return <div>Error fetching API, my friend.</div>
     if( blogId && !isBlog ) return <div>Blog not found</div>
     
@@ -40,7 +39,6 @@ export const getStaticProps = async () => {
     const { loading , error, data } = await client.query({
         query: blogs ,
       });
-    
     return {
         props:{
             loading,
