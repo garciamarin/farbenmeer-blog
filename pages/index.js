@@ -1,9 +1,12 @@
+import Link from "next/link"
 
 export default function Home() {
+  
   return (
-    <div >
-        <h1>Blog</h1>
-    </div>
+    <Link href={`/gql/`} > 
+      <h4>To blog using GraphQL server</h4>
+    </Link>
   )
 }
+
 

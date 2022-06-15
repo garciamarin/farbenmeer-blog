@@ -18,6 +18,7 @@ const blogs = gql`
         subtitle
         created
         image
+        content
       }
     }
   `

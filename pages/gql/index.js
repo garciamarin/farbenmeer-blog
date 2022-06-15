@@ -11,20 +11,25 @@ import LayoutGQL from "../../components/LayoutGQL";
 
  
 export default function index({loading, error, blogs}) {
-    
+    const router = useRouter()
+    const blogId = router.query.blog
+    const isBlog = blogs.find( blog => blog.id === blogId )
+    console.log(isBlog)
+
     if(error) return <div>Error fetching API, my friend.</div>
+    if( blogId && !isBlog ) return <div>Blog not found</div>
     
     return ( 
     <>
         { loading 
             ? <p>loading...</p> 
             : 
-            // id ? 
-            //     <RenderBlogs blogposts={blogs}>
-            //         <BlogDetails blog={blogs[id]} loading={loading}/>
-            //     </RenderBlogs> 
-            //     :
-            <RenderBlogs blogposts={blogs}/>   
+            isBlog ? 
+                <RenderBlogs blogposts={blogs}>
+                    <BlogDetails blog={isBlog} loading={loading}/>
+                </RenderBlogs> 
+                :
+                <RenderBlogs blogposts={blogs}/>   
         }
     </>
     )
