@@ -6,7 +6,7 @@ export default function BlogPreview({blog}) {
 
   return (
     <li> 
-        <Link href={`/gql/blog/${blog.id}`}>
+        <Link href={`/gql/${blog.id}`}  >
             <div>
                 <img src={blog.image} alt="blog" width={100} />
                 <div >
