@@ -4,7 +4,6 @@ import Link from "next/link"
 
 import { blogs, client, getBlog } from "../../fetch/ClientGQL"
 
-
 export const getStaticPaths = async ( ) => { 
   
   const { data } = await client.query({query: blogs, });

@@ -8,7 +8,7 @@ export default function BlogDetails ({loading, blog}) {
           <div className="w-[55%] 
             h-fit 
             overflow-none
-            bg-pink-500 
+            bg-gradient-to-r from-pink-600 to-pink-700
             p-4
             rounded-lg
             shadow-lg
@@ -16,7 +16,17 @@ export default function BlogDetails ({loading, blog}) {
             "
             data-testid='blog-details'
           >
-            <Link href="/gql"><p className="p-4 text-right font-medium"> Close </p></Link> 
+            <Link href="/gql">
+              <p className="
+                  w-fit
+                  ml-auto
+                  p-4 
+                  font-medium 
+                  hover:text-yellow-100 hover:cursor-pointer
+              "> 
+                Close 
+              </p>
+            </Link> 
             <div >      
               <img  className='
                   mr-4  ml-0

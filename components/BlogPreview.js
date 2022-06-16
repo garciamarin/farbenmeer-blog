@@ -6,7 +6,12 @@ export default function BlogPreview({blog}) {
   const router = useRouter()
 
   return (
-    <li data-testid={`blog-${blog.id}`} className='mb-3 shadow-lg  bg-green-500 rounded-lg group'> 
+    <div data-testid={`blog-${blog.id}`} 
+      className='mb-3 
+      hover:shadow-md hover:shadow-green-500/50
+      bg-gradient-to-r from-green-500 to-green-600
+      rounded-lg group
+    '> 
         <div onClick={()=> {
               router.push(`/gql/?blog=${blog.id}`, 
               undefined, { shallow: true })}}
@@ -25,7 +30,7 @@ export default function BlogPreview({blog}) {
               </div>      
           </div>
         </div>
-    </li>
+    </div>
   )
 }
 

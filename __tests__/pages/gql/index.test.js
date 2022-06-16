@@ -1,14 +1,13 @@
 import React from 'react'
 import { render, screen } from '@testing-library/react'
 import '@testing-library/jest-dom'
+import { useRouter } from 'next/router'
 
 import { client } from '../../../fetch/ClientGQL'
 import Index, {getStaticProps} from '../../../pages/gql/index'
 import {blogposts} from '../../../public/DataMock/data'
-import { useRouter } from 'next/router'
-import next from 'next'
 
-describe('Index', () => {
+describe('Index layout and logic', () => {
     it('renders props correctly', () => {
 
         render(<Index  loading={false} error={null} blogs= {blogposts}/>)
@@ -22,7 +21,7 @@ describe('Index', () => {
         })
     })
 
-    it('hadnles loading correctly', () => {
+    it('hanDles loading correctly', () => {
 
         render(<Index  loading={true} error={null} blogs= {blogposts}/>)
         
