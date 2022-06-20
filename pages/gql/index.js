@@ -47,11 +47,4 @@ export const getStaticProps = async () => {
 
 }
 
-//  index.getLayout = function getLayout(page) {
-//     return (
-//       <LayoutGQL>
-//         {page}
-//       </LayoutGQL>
-//     )
-//   }
 

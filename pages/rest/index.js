@@ -1,13 +1,11 @@
 import { useRouter } from 'next/router'
-
-import { blogs, client } from "../../fetch/ClientGQL";
+import { useEffect } from 'react';
 
 import BlogDetails from "../../components/BlogDetails";
 import RenderBlogs from "../../components/RenderBlogs"
 import ServerError from "../../components/ServerError";
 import BlogNotFound from "../../components/BlogNotFound";
 import useApiRest from '../../fetch/useApiRest';
-import { useEffect } from 'react';
 import Loading from '../../components/loading';
 
 export default function Rest() {

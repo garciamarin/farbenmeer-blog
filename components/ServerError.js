@@ -16,7 +16,7 @@ export default function ServerError () {
             <h2> 5 0 0 </h2>
             <br />
             <p>
-        I can take you <Link href="/gql">back</Link>.
+                I can take you <Link href="/gql">back</Link>.
             </p> 
         </div> 
 )}

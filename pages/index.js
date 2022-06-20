@@ -5,13 +5,19 @@ export default function Home() {
   const apiTextElement = (api) => {
     return (
       <div className="m-2">
-      <span >To blog using </span>
-      <Link  href={api==='Rest' ? `/rest/` : `/gql/`} > 
-        <span className="text-green-800 hover:cursor-pointer hover:text-green-900"> 
-          {api} 
-        </span>
-      </Link>
-      <span> API</span>
+        <p>
+          To blog using  
+          <Link  href={api==='Rest' ? `/rest/` : `/gql/`} > 
+            <span className="
+                text-green-800 
+                hover:cursor-pointer 
+                hover:text-green-900"
+            >  
+              {` ${api} `} 
+            </span>
+          </Link>
+          API
+        </p>
       </div> 
 )}
 
