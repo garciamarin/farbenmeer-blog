@@ -7,8 +7,12 @@ describe('Home', () => {
   it('renders a Link', () => {
     render(<Home />)
     
-    const link = screen.getByText(/GraphQL server/i)
-    expect(link).toBeInTheDocument()
+    const graphQLLink = screen.getByText(/GraphQL/i)
+    const restLink = screen.getByText(/rest/i)
+
+    expect(graphQLLink).toBeInTheDocument()
+    expect(restLink).toBeInTheDocument()
+
   })
 })
 
