@@ -7,8 +7,9 @@ import { client } from '../../../fetch/ClientGQL'
 import Index, {getStaticProps} from '../../../pages/gql/index'
 import {blogposts} from '../../../public/DataMock/data'
 
-describe('Index layout and logic', () => {
-    it('renders props correctly', () => {
+describe('Layout and logic', () => {
+
+    it('renders blogposts from props correctly', () => {
 
         render(<Index  loading={false} error={null} blogs= {blogposts}/>)
         
@@ -21,7 +22,7 @@ describe('Index layout and logic', () => {
         })
     })
 
-    it('hanDles loading correctly', () => {
+    it('handles loading correctly', () => {
 
         render(<Index  loading={true} error={null} blogs= {blogposts}/>)
         
@@ -43,25 +44,26 @@ describe('Index layout and logic', () => {
 })
 
 describe('getStaticProps', () => {
-it('getStaticProps returns the correct props', async () => {
-        
-    const data = {blogposts} 
- 
-    jest.spyOn(client, 'query').mockImplementation(async () => ({
-        loading: false , error: false, data
-    }
-    ))
 
-    const response = await getStaticProps({})
+    it('getStaticProps returns the correct props', async () => {
+            
+        const data = {blogposts} 
+    
+        jest.spyOn(client, 'query').mockImplementation(async () => ({
+            loading: false , error: false, data
+        }
+        ))
 
-    expect(client.query).toHaveBeenCalled()
-    expect(response).toEqual({
-        props:{
-            loading: false,
-            error:  null,
-            blogs: data.blogposts}
+        const response = await getStaticProps({})
+
+        expect(client.query).toHaveBeenCalled()
+        expect(response).toEqual({
+            props:{
+                loading: false,
+                error:  null,
+                blogs: data.blogposts}
+        })
     })
-})
 })
 
 // jest.mock("next/router", () => ({
@@ -77,54 +79,52 @@ jest.mock("next/router", () => ({
 
 describe('endpoint ?blog={id}', () => {
    
-    
-    it('renders blog details', async () => {
+    it('renders blog details and close button', async () => {
         
         useRouter.mockImplementation( () =>     {
             return {
                 query: {blog:'1'}
             };
         })
-        const data = {blogposts} 
-        
-        const router = useRouter()    
-        const index = render(<Index  loading={false} error={null} blogs= {blogposts}/>)
+   
+        render(<Index  loading={false} error={null} blogs= {blogposts}/>)
 
         const blogDetails = screen.getByTestId(/blog-details/i)
+        const closeButton = screen.getByText(/close/i)
+
         expect(blogDetails).toBeInTheDocument()
+        expect(closeButton).toBeInTheDocument()
     })
 
-})
-
-
-describe('endpoint ?blog={id} for invalid id', () => {
-    
-    it('renders error ', async () => {
+    it('renders "not found" if blog id does not exist', async () => {
+        
         useRouter.mockImplementation( () =>     {
             return {
                 query: {blog:'23'}
             };
         })
-        const data = {blogposts} 
 
-        const router = useRouter()    
-        const index = render(<Index  loading={false} error={null} blogs= {blogposts}/>)
+        render(<Index  loading={false} error={null} blogs= {blogposts}/>)
         const blogDetails = screen.getByText(/blog not found/i)
         expect(blogDetails).toBeInTheDocument()
-    })    
-})
-
-
-it('renders loading', async () => {
-        
-    useRouter.mockImplementation( () =>     {
-        return {
-            query: {blog:'1'}
-        };
-    })
-    render(<Index  loading={true} error={null} blogs= {blogposts}/>)
-        
-    const loadingMessage =  screen.getByText(/loading/i)
+    }) 
     
-    expect(loadingMessage).toBeInTheDocument()
+    it('renders loading', async () => {
+        
+        useRouter.mockImplementation( () =>     {
+            return {
+                query: {blog:'1'}
+            };
+        })
+
+        render(<Index  loading={true} error={null} blogs= {blogposts}/>)
+            
+        const loadingMessage =  screen.getByText(/loading/i)
+        
+        expect(loadingMessage).toBeInTheDocument()
+    })
+
 })
+
+
+

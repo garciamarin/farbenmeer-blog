@@ -1,6 +1,6 @@
 import BlogPreview from "./BlogPreview"
 
-export default function  RenderBlogs ({children, blogposts}) {
+export default function  RenderBlogs ({ children, blogposts, api }) {
     return ( 
         <div className="px-[2em] flex justify-between mt-[1.5em]">
            
@@ -9,9 +9,7 @@ export default function  RenderBlogs ({children, blogposts}) {
                     { 
                         blogposts?.map( 
                             (blog) =>  
-                                <div>
-                                <BlogPreview blog={blog} key={blog.id} />
-                                </div>
+                                <BlogPreview blog={blog} key={blog.id} api={api} />
                     )}
                 </div>
             </div> 

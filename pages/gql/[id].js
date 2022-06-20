@@ -1,8 +1,19 @@
+import { blogs, client, getBlog } from "../../fetch/ClientGQL"
+
 import RenderBlogs from "../../components/RenderBlogs"
 import BlogDetails from "../../components/BlogDetails"
-import Link from "next/link"
+import ServerError from "../../components/ServerError"
 
-import { blogs, client, getBlog } from "../../fetch/ClientGQL"
+export default function Blog({loading, blog, error, blogposts}) {
+
+  if(error) return < ServerError />
+
+  return (
+    <RenderBlogs blogposts={blogposts}>
+        <BlogDetails blog={blog} loading={loading}/>
+    </RenderBlogs>
+    )
+}
 
 export const getStaticPaths = async ( ) => { 
   
@@ -17,8 +28,8 @@ export const getStaticPaths = async ( ) => {
 export const getStaticProps = async (context) => { 
 
   const { loading , error, data } = await client.query({ query:
-       getBlog ,
-       variables: { id: context.params.id }
+        getBlog ,
+        variables: { id: context.params.id }
     })
     const blogposts = await client.query({
       query: blogs ,
@@ -33,22 +44,5 @@ export const getStaticProps = async (context) => {
       }
   }
 }
-
-export default function Blog({loading, blog, error, blogposts}) {
-
-  if(error) return (
-    <>
-        <p>There was an error, my friend.</p>
-        <Link href="/gql"><p> Take me back, please! </p></Link> 
-    </>
-  )
-
-  return (
-    <RenderBlogs blogposts={blogposts}>
-        <BlogDetails blog={blog} loading={loading}/>
-    </RenderBlogs>
-    )
-}
-
 
 

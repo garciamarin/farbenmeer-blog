@@ -1,10 +1,28 @@
 import Link from "next/link"
+import { useEffect } from "react"
+import { useState } from "react"
 import { dateToHuman } from "./dateToHuman"
+import Loading from "./loading"
 
 
-export default function BlogDetails ({loading, blog}) { 
-    return ( loading ? 
-          <p> loading </p> :
+export default function BlogDetails ({loading, blog, api}) { 
+    
+  if(!blog) return 
+  
+  const [copySuccess, setCopySuccess] = useState('')
+  const [blogURL, setBlogURL] = useState(`http://localhost:3000/${api}?blog=${blog.id}`)
+  const copyHandler = () => { 
+    navigator.clipboard.writeText(blogURL)
+    setCopySuccess('Link Copied!')
+  } 
+  
+  useEffect(() => {
+    setBlogURL(`http://localhost:3000/${api}?blog=${blog.id}`)
+    setCopySuccess('')
+  }, [blog])
+  
+  return ( loading ? 
+          <Loading/> :
           <div className="w-[55%] 
             h-fit 
             overflow-none
@@ -16,17 +34,37 @@ export default function BlogDetails ({loading, blog}) {
             "
             data-testid='blog-details'
           >
-            <Link href="/gql">
-              <p className="
-                  w-fit
-                  ml-auto
-                  p-4 
+            <div className="flex jusstify-around">
+              
+              <div className={
+                copySuccess ?
+                  `w-fit
+                  text-amber-400                  
+                  mb-4
+                  font-medium` 
+                :
+                  `w-fit
+                  mb-4
                   font-medium 
-                  hover:text-yellow-100 hover:cursor-pointer
-              "> 
-                Close 
-              </p>
-            </Link> 
+                hover:text-yellow-100 hover:cursor-pointer`
+                } 
+                onClick={copyHandler}
+              >
+                {copySuccess || `Copy link`}
+              </div>
+
+              <Link href="/gql">
+                <p className="
+                    w-fit
+                    mb-4
+                    ml-auto
+                    font-medium 
+                    hover:text-yellow-100 hover:cursor-pointer
+                "> 
+                  Close 
+                </p>
+              </Link> 
+            </div>
             <div >      
               <img  className='
                   mr-4  ml-0

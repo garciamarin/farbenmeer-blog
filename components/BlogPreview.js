@@ -2,7 +2,7 @@ import Link from "next/link";
 import { useRouter } from 'next/router'
 import { dateToHuman } from "./dateToHuman";
 
-export default function BlogPreview({blog}) {
+export default function BlogPreview({ blog, id, api }) {
   const router = useRouter()
 
   return (
@@ -11,9 +11,11 @@ export default function BlogPreview({blog}) {
       hover:shadow-md hover:shadow-green-500/50
       bg-gradient-to-r from-green-500 to-green-600
       rounded-lg group
-    '> 
+      '
+      key={id}
+    > 
         <div onClick={()=> {
-              router.push(`/gql/?blog=${blog.id}`, 
+              router.push(`/${api}/?blog=${blog.id}`, 
               undefined, { shallow: true })}}
         >
           <div className='group-hover:cursor-pointer' >
